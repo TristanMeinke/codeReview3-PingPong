@@ -8,18 +8,19 @@ var populateArray = function (numInput) {
 }
 
 var outputPingPong = function () {
-  numList.map(function(integers) {
-    if (integers === 0) {
-
+  numList.each(function(integer) {
+    if (integer % 15 === 0) {
+      $("#output").append("<li>" + "Ping Pong!" + "</li>");
     }
-    else if (integers % 15 === 0) {
-
+    else if (integer % 5 === 0) {
+      $("#output").append("<li>" + "...Pong!" + "</li>");
     }
-    else if (integers % 5 === 0) {
-
+    else if (integer % 5 === 0) {
+      $("#output").append("<li>" + "Ping..." + "</li>");
     }
-    else if (integers % 5 === 0) {
-
+    else
+    {
+      $("#output").append("<li>" + integer + "</li>");
     }
   });
 }
