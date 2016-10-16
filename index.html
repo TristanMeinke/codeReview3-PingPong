@@ -10,24 +10,33 @@
   </head>
   <body>
     <div class = "container">
+      <div class = "sidebar">
+
+      </div>
       <div class = "jumbotron">
         <h1>Ping Pong</h1>
         <br>
 
-        <form id="userInput">
+        <form id = "userInput">
           <div class="form-group">
             <label for="userInput">Enter a number:</label><br>
             <input id="userInput" type="text">
           </div>
 
-          <button type="submit" class="btn btn-gray">Ping and Pong!</button>
+          <button type = "submit" class = "btn btn-block btn-gray">Ping and Pong!</button>
         </form>
+
+        <div id = "output">
+
+          <ul>
+            <!-- Results are appended to this output list -->
+          </ul>
+        </div>
+
       </div>
 
-      <div class = "jumbotron" id = "outputWrapper">
-        <ul id = "output">
-
-        </ul>
+      <div class = "jumbotron">
+        <button type = "reset" class = "btn btn-block btn-gray" id = "reset">Reset</button>
       </div>
     </div>
   </body>
