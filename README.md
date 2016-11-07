@@ -18,8 +18,8 @@ Program implements an integer limit of 10,000, for the purpose of managing array
 This Program:
 
 1. Takes input and creates an array of integer values up to the number entered.
-    Example Input: 5
-    Example Output:[1,2,3,4,5]
+    Example Input: 2
+    Example Output:[1,2]
 
 2. Searches through that array, checking if a number is divisible by 3, then replaces those numbers with "Ping...".
     Example Input: [3]
