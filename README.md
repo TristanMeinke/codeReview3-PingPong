@@ -48,4 +48,4 @@ Input which is not a number (NaN) does not deploy the relevant error message; th
 
 ###Link:
 
-The above link will open the live site, hosted on GitHub Pages.
+The above link will open the live site, hosted on GitHub Pages: https://tristanmeinke.github.io/codeReview3-PingPong/
