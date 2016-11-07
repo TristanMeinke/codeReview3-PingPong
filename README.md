@@ -13,6 +13,31 @@ If the users chooses to enter another number without pressing the reset button, 
 
 Program implements an integer limit of 10,000, for the purpose of managing array size.  If the user enters a higher number, they will be prompted for a lower one.
 
+###Specs
+
+This Program:
+
+1. Takes input and creates an array of integer values up to the number entered.
+    Example Input: 5
+    Example Output:[1,2,3,4,5]
+
+2. Searches through that array, checking if a number is divisible by 3, then replaces those numbers with "Ping...".
+    Example Input: [3]
+    Example Output:[1,2,"ping"]
+
+3. Searches through the array checking if a number is divisible by 5, then replaces it with "...Pong".
+    Example Input: [5]
+    Example Output:[1,2,3,4"pong"]
+
+4. Searches through the array checking if a number is divisible by 15, then replaces it with "Ping Pong!".
+    Example Input: [15]
+    Example Output:[1,2,"Ping...", 4, "...Pong!", "Ping...", 7, 8, "Ping...", "...Pong!", 11, "Ping...", 13, 14, "Ping Pong!"]
+
+5. Prints the results to the page.
+    Example Input:[10]
+    Example Output: [1,2,"Ping...", 4, "...Pong!", "Ping...", 7, 8, "Ping...", "...Pong!"]
+
+
 ###Languages and Tools Used
 
 Back-end logic written in JavaScript, UI logic written with jQuery.  A basic HTML/CSS page is used for display.
