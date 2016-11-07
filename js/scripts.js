@@ -1,89 +1,73 @@
-//Business Logic
+//Variable Declarations
 
-var pizzaSize;
-var textOfSize;
+var numInput;
+var numList = [];
 
-var valueOfSize;
+var ping = "Ping..."
+var pong = "...Pong!"
+var pingPong = "Ping Pong!"
 
-var pizzaSauce;
-var textOfSauce;
+//Back-End Logic
 
-var toppingSelections = [];
-var checkboxInput;
-
-var pizzaCost;
-var costBySize;
-var costInToppings;
-
-var pizzaToppings;
-var size;
-var sauce;
-var orderPrice;
-var pizzaOrder;
-
-function Pizza(size, sauce, toppings, price){
-  this.size = size;
-  this.sauce = sauce;
-  this.toppings = toppings;
-  this.price = price;
-}
-
-Pizza.prototype.evaluateCost = function(checkboxInput) {
-  costBySize = document.getElementById("selectSize");
-  valueOfSize = parseInt(costBySize.options[costBySize.selectedIndex].value);
-  costInToppings = toppingSelections.length * 2;
-  pizzaCost = valueOfSize + costInToppings;
-  return pizzaCost;
-}
-
-function customerSelections(checkboxInput) {
-  toppingSelections = [];
-  for (var i = 0; i < checkboxInput.length; i++)
+var populateArray = function (numInput) {
+  if (numInput > 10000)
   {
-    if (checkboxInput[i].checked && checkboxInput[i] !== undefined)
+    $("#output").append("<li><h4>" + "Please enter a number less than or equal to 10,000." + "</h4></li>");
+  }
+  else if (numInput === NaN){
+    $("#output").append("<li><h4>" + "Please enter a number less than or equal to 10,000." + "</h4></li>");
+  }
+  else
+  {
+    for (i = 1; i < numInput + 1; i++)
     {
-      toppingSelections.push(checkboxInput[i].value);
+      numList.push(i);
     }
   }
-  return toppingSelections;
+
 }
 
-function getPizzaSize() {
-  pizzaSize = document.getElementById("selectSize");
-  textOfSize = pizzaSize.options[pizzaSize.selectedIndex].text;
-  return textOfSize;
-}
+var outputPingPong = function(integer) {
+  var result;
 
-function getPizzaSauce() {
-  pizzaSauce = document.getElementById("selectSauce");
-  textOfSauce = pizzaSauce.options[pizzaSauce.selectedIndex].text;
-  return textOfSauce;
-}
-
-//User Interface Logic
-
-$(document).ready(function() {
-  $("form#userChoices").submit(function(event) {
-    event.preventDefault();
-    checkboxInput = document.getElementsByTagName("input");
-    pizzaToppings = customerSelections(checkboxInput);
-    size = getPizzaSize();
-    sauce = getPizzaSauce();
-    pizzaOrder = new Pizza(size, sauce, pizzaToppings, orderPrice);
-    orderPrice = pizzaOrder.evaluateCost(checkboxInput);
-
-    $("li#size").append("Size: " + size);
-    $("li#sauce").append("Sauce: " + sauce);
-
-    // $("ul#toppingList").append("Toppings: ");
-    for (var i = 0; i < pizzaToppings.length; i++)
+  numList.map(function(integer) {
+    if (integer % 15 === 0)
     {
-      $("ul#toppingList").append("<li>" + pizzaToppings[i] + "</li>");
+      result += "Ping Pong! ";
     }
+    else if (integer % 5 === 0)
+    {
+      result += "...Pong! ";
+    }
+    else if (integer % 3 === 0)
+    {
+      result += "Ping... ";
+    }
+    else
+    {
+      result +=  integer + " ";
+    }
+  });
+  document.body.appendChild(document.createTextNode(result));
+}
 
-    $("h3#price").append("Price: $" + orderPrice +".00");
+//Logic pertaining to User Interface
 
-    $("#frontPage").hide();
-    $("#receipt").show();
+$(document).ready(function () {
+  $("form#userInput").submit(function(event) {
+
+    event.preventDefault();
+    $("#output").empty();
+
+    numInput = parseInt($("input#userInput").val());
+    numList = [];
+    populateArray(numInput);
+    outputPingPong();
+
+    $("#output").show()
+
+    $("#reset").click(function() {
+      location.reload();
+    });
   });
 });
