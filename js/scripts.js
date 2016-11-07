@@ -10,19 +10,10 @@ var pingPong = "Ping Pong!"
 //Back-End Logic
 
 var populateArray = function (numInput) {
-  if (numInput > 10000)
+
+  for (i = 1; i < numInput + 1; i++)
   {
-    $("#output").append("<li><h4>" + "Please enter a number less than or equal to 10,000." + "</h4></li>");
-  }
-  else if (numInput === NaN){
-    $("#output").append("<li><h4>" + "Please enter a number less than or equal to 10,000." + "</h4></li>");
-  }
-  else
-  {
-    for (i = 1; i < numInput + 1; i++)
-    {
-      numList.push(i);
-    }
+    numList.push(i);
   }
 
 }
