@@ -1,66 +1,89 @@
-//Variable Declarations
+//Business Logic
 
-var numInput;
-var numList = [];
+var pizzaSize;
+var textOfSize;
 
-//Back-End Logic
+var valueOfSize;
 
-var populateArray = function (numInput) {
-  if (numInput > 10000)
-  {
-    $("#output").append("<li><h4>" + "Please enter a number less than or equal to 10,000." + "</h4></li>");
-  }
-  else if (numInput === NaN){
-    $("#output").append("<li><h4>" + "Please enter a number less than or equal to 10,000." + "</h4></li>");
-  }
-  else
-  {
-    for (i = 1; i < numInput + 1; i++)
-    {
-      numList.push(i);
-    }
-  }
+var pizzaSauce;
+var textOfSauce;
 
+var toppingSelections = [];
+var checkboxInput;
+
+var pizzaCost;
+var costBySize;
+var costInToppings;
+
+var pizzaToppings;
+var size;
+var sauce;
+var orderPrice;
+var pizzaOrder;
+
+function Pizza(size, sauce, toppings, price){
+  this.size = size;
+  this.sauce = sauce;
+  this.toppings = toppings;
+  this.price = price;
 }
 
-var outputPingPong = function () {
-  numList.map(function(integer) {
-    if (integer % 15 === 0)
-    {
-      $("#output").append("<li>" + "Ping Pong!" + "</li>");
-    }
-    else if (integer % 5 === 0)
-    {
-      $("#output").append("<li>" + "...Pong!" + "</li>");
-    }
-    else if (integer % 3 === 0)
-    {
-      $("#output").append("<li>" + "Ping..." + "</li>");
-    }
-    else
-    {
-      $("#output").append("<li>" + integer + "</li>");
-    }
-  });
+Pizza.prototype.evaluateCost = function(checkboxInput) {
+  costBySize = document.getElementById("selectSize");
+  valueOfSize = parseInt(costBySize.options[costBySize.selectedIndex].value);
+  costInToppings = toppingSelections.length * 2;
+  pizzaCost = valueOfSize + costInToppings;
+  return pizzaCost;
 }
 
-//Logic pertaining to User Interface
+function customerSelections(checkboxInput) {
+  toppingSelections = [];
+  for (var i = 0; i < checkboxInput.length; i++)
+  {
+    if (checkboxInput[i].checked && checkboxInput[i] !== undefined)
+    {
+      toppingSelections.push(checkboxInput[i].value);
+    }
+  }
+  return toppingSelections;
+}
 
-$(document).ready(function () {
-  $("form#userInput").submit(function(event) {
+function getPizzaSize() {
+  pizzaSize = document.getElementById("selectSize");
+  textOfSize = pizzaSize.options[pizzaSize.selectedIndex].text;
+  return textOfSize;
+}
 
+function getPizzaSauce() {
+  pizzaSauce = document.getElementById("selectSauce");
+  textOfSauce = pizzaSauce.options[pizzaSauce.selectedIndex].text;
+  return textOfSauce;
+}
+
+//User Interface Logic
+
+$(document).ready(function() {
+  $("form#userChoices").submit(function(event) {
     event.preventDefault();
-    $("#output").empty();
+    checkboxInput = document.getElementsByTagName("input");
+    pizzaToppings = customerSelections(checkboxInput);
+    size = getPizzaSize();
+    sauce = getPizzaSauce();
+    pizzaOrder = new Pizza(size, sauce, pizzaToppings, orderPrice);
+    orderPrice = pizzaOrder.evaluateCost(checkboxInput);
 
-    numInput = parseInt($("input#userInput").val());
-    numList = [];
-    populateArray(numInput);
-    outputPingPong();
+    $("li#size").append("Size: " + size);
+    $("li#sauce").append("Sauce: " + sauce);
 
-    $("#output").show()
+    // $("ul#toppingList").append("Toppings: ");
+    for (var i = 0; i < pizzaToppings.length; i++)
+    {
+      $("ul#toppingList").append("<li>" + pizzaToppings[i] + "</li>");
+    }
 
-    $("#reset").click(function() {
-      location.reload();
-    });
+    $("h3#price").append("Price: $" + orderPrice +".00");
+
+    $("#frontPage").hide();
+    $("#receipt").show();
   });
 });
